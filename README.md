@@ -1,13 +1,18 @@
 # Discord Bot Template
 
-A minimal Discord bot template using discord.js v14.
+A minimal Discord bot template using discord.js v14, featuring a clean and modular architecture.
 
 ## Features
 
-- Command handling structure
-- Slash command support
-- Environment configuration
-- Basic error handling
+- Modern Discord.js v14 implementation
+- Slash command support with automated command deployment
+- Environment-based configuration (development/production)
+- Robust error handling and logging
+- Command Collection system
+- Modular command structure
+- Configurable presence and embed colors
+- Built-in cooldown system
+- Comprehensive event handling
 
 ## Prerequisites
 
@@ -27,13 +32,17 @@ cd discord-bot-template
 npm install
 ```
 
-3. Create a `.env` file:
+3. Configure environment variables:
    - Copy `.env.example` to `.env`
-   - Fill in your bot token and other values
+   - Fill in the following required variables:
+     - `TOKEN`: Your Discord bot token
+     - `CLIENT_ID`: Your bot's client ID
+     - `GUILD_ID`: Your development server ID (required for development environment)
+     - `NODE_ENV`: Set to 'development' or 'production'
 
-4. Deploy commands:
+4. Deploy slash commands:
 ```bash
-node src/deploy-commands.js
+npm run deploy
 ```
 
 5. Start the bot:
@@ -41,18 +50,29 @@ node src/deploy-commands.js
 npm start
 ```
 
-For development:
+For development with auto-reload:
 ```bash
 npm run dev
 ```
 
+## Project Structure
+
+```
+├── src/
+│   ├── commands/         # Slash commands
+│   ├── config.js         # Bot configuration
+│   ├── deploy-commands.js# Command deployment script
+│   └── index.js         # Main bot file
+├── .env.example         # Environment variables template
+├── .gitignore          # Git ignore rules
+├── package.json        # Project dependencies and scripts
+└── README.md          # Project documentation
+```
+
 ## Command Structure
 
-Commands are stored in `src/commands/`. Each command should export:
-- `data`: SlashCommandBuilder with command definition
-- `execute`: Async function handling the command
+Commands are stored in `src/commands/`. Each command module must export:
 
-Example:
 ```javascript
 module.exports = {
     data: new SlashCommandBuilder()
@@ -64,12 +84,44 @@ module.exports = {
 };
 ```
 
+## Configuration
+
+The bot's configuration is centralized in `src/config.js` and includes:
+
+- Presence settings
+- Embed colors
+- Command categories
+- Development options
+- Command cooldowns
+
+## Available Scripts
+
+- `npm start`: Start the bot
+- `npm run dev`: Start the bot with nodemon for development
+- `npm run deploy`: Deploy slash commands
+
+## Dependencies
+
+- `discord.js`: ^14.18.0
+- `dotenv`: ^16.4.1
+- `nodemon`: ^3.0.3 (dev dependency)
+
 ## Environment Variables
 
-- `TOKEN`: Your Discord bot token
-- `CLIENT_ID`: Your bot's client ID
-- `GUILD_ID`: Development server ID (optional)
-- `NODE_ENV`: 'development' or 'production'
+| Variable    | Description                    | Required | Default     |
+|------------|--------------------------------|----------|-------------|
+| TOKEN      | Discord bot token              | Yes      | -           |
+| CLIENT_ID  | Bot's client ID               | Yes      | -           |
+| GUILD_ID   | Development server ID          | Dev only | -           |
+| NODE_ENV   | Environment mode              | No       | development |
+
+## Error Handling
+
+The bot includes comprehensive error handling:
+- Command execution error handling
+- Process termination handling
+- Unhandled promise rejection catching
+- Discord client error handling
 
 ## License
 
