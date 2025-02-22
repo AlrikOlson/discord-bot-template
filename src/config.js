@@ -1,6 +1,7 @@
 /**
- * Bot configuration
+ * Bot Configuration
  * Centralized configuration options for the bot
+ * Note: Command deployment settings are for reference only as deployment is handled separately
  */
 module.exports = {
     // Bot presence configuration
@@ -40,5 +41,28 @@ module.exports = {
             // Specific command cooldowns
             ping: 5
         }
+    },
+
+    // Deployment configuration reference
+    // Note: These settings are for documentation only
+    // Actual deployment is handled by src/scripts/deploy.js
+    deployment: {
+        development: {
+            type: 'guild',
+            updateTime: 'instant',
+            requiresGuildId: true
+        },
+        production: {
+            type: 'global',
+            updateTime: '1 hour',
+            requiresGuildId: false
+        }
+    },
+
+    // Command validation schema
+    // Used to ensure all commands follow the same structure
+    commandSchema: {
+        requiredProperties: ['data', 'execute'],
+        optionalProperties: ['cooldown', 'permissions', 'category']
     }
 };

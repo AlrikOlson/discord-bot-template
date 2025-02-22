@@ -1,12 +1,21 @@
 {
     "name": "discord-bot-template",
     "version": "1.0.0",
-    "description": "A minimal Discord bot template",
+    "description": "A minimal Discord bot template with secure command deployment",
     "main": "src/index.js",
     "scripts": {
         "start": "node src/index.js",
         "dev": "nodemon src/index.js",
-        "deploy": "node src/deploy-commands.js"
+        "deploy": "node src/scripts/deploy.js",
+        "deploy:prod": "NODE_ENV=production node src/scripts/deploy.js",
+        "deploy:dev": "NODE_ENV=development node src/scripts/deploy.js"
+    },
+    "scripts-comments": {
+        "start": "Runs the bot in production mode",
+        "dev": "Runs the bot with hot-reload for development",
+        "deploy": "Deploys commands based on NODE_ENV (separate from bot runtime)",
+        "deploy:prod": "Deploys commands globally (takes up to 1 hour to propagate)",
+        "deploy:dev": "Deploys commands to development guild (instant update)"
     },
     "dependencies": {
         "discord.js": "^14.18.0",
@@ -17,5 +26,13 @@
     },
     "engines": {
         "node": ">=16.9.0"
-    }
+    },
+    "keywords": [
+        "discord",
+        "bot",
+        "discord.js",
+        "template"
+    ],
+    "author": "",
+    "license": "MIT"
 }

@@ -5,7 +5,7 @@ A minimal Discord bot template using discord.js v14, featuring a clean and modul
 ## Features
 
 - Modern Discord.js v14 implementation
-- Slash command support with automated command deployment
+- Slash command support with secure, separate command deployment
 - Environment-based configuration (development/production)
 - Robust error handling and logging
 - Command Collection system
@@ -18,6 +18,21 @@ A minimal Discord bot template using discord.js v14, featuring a clean and modul
 
 - [Node.js](https://nodejs.org/) (v16.9.0 or higher)
 - A Discord Bot Token ([Discord Developer Portal](https://discord.com/developers/applications))
+
+## Project Structure
+
+```
+├── src/
+│   ├── commands/        # Slash commands
+│   ├── scripts/        # Utility and admin scripts
+│   │   └── deploy.js   # Command deployment script (separate from bot)
+│   ├── config.js       # Bot configuration
+│   └── index.js        # Main bot file
+├── .env.example        # Environment variables template
+├── .gitignore         # Git ignore rules
+├── package.json       # Project dependencies and scripts
+└── README.md         # Project documentation
+```
 
 ## Setup
 
@@ -45,6 +60,12 @@ npm install
 npm run deploy
 ```
 
+**Important Note**: Command deployment is intentionally separated from the bot's runtime code. This is a security best practice that:
+- Prevents accidental command updates during runtime
+- Reduces attack surface in production
+- Follows Discord.js recommended patterns
+- Provides explicit control over when commands are updated
+
 5. Start the bot:
 ```bash
 npm start
@@ -53,20 +74,6 @@ npm start
 For development with auto-reload:
 ```bash
 npm run dev
-```
-
-## Project Structure
-
-```
-├── src/
-│   ├── commands/         # Slash commands
-│   ├── config.js         # Bot configuration
-│   ├── deploy-commands.js# Command deployment script
-│   └── index.js         # Main bot file
-├── .env.example         # Environment variables template
-├── .gitignore          # Git ignore rules
-├── package.json        # Project dependencies and scripts
-└── README.md          # Project documentation
 ```
 
 ## Command Structure
@@ -98,7 +105,7 @@ The bot's configuration is centralized in `src/config.js` and includes:
 
 - `npm start`: Start the bot
 - `npm run dev`: Start the bot with nodemon for development
-- `npm run deploy`: Deploy slash commands
+- `npm run deploy`: Deploy slash commands (separate from bot runtime)
 
 ## Dependencies
 
