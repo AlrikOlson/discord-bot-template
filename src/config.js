@@ -8,9 +8,9 @@ module.exports = {
     presence: {
         activities: [{
             name: '/help',
-            type: 'LISTENING'
+            type: 'LISTENING',
         }],
-        status: 'online'
+        status: 'online',
     },
 
     // Colors for embeds
@@ -18,20 +18,20 @@ module.exports = {
         primary: '#5865F2',    // Discord blurple
         success: '#57F287',    // Green
         error: '#ED4245',      // Red
-        warning: '#FEE75C'     // Yellow
+        warning: '#FEE75C',     // Yellow
     },
 
     // Command categories
     categories: {
         GENERAL: 'General',
         UTILITY: 'Utility',
-        ADMIN: 'Administration'
+        ADMIN: 'Administration',
     },
 
     // Development options
     development: {
         debugLevel: process.env.NODE_ENV === 'development' ? 'debug' : 'warn',
-        enableCommandLogging: true
+        enableCommandLogging: true,
     },
 
     // Cooldown settings (in seconds)
@@ -39,8 +39,8 @@ module.exports = {
         default: 3,
         commands: {
             // Specific command cooldowns
-            ping: 5
-        }
+            ping: 5,
+        },
     },
 
     // Deployment configuration reference
@@ -50,19 +50,19 @@ module.exports = {
         development: {
             type: 'guild',
             updateTime: 'instant',
-            requiresGuildId: true
+            requiresGuildId: true,
         },
         production: {
             type: 'global',
             updateTime: '1 hour',
-            requiresGuildId: false
-        }
+            requiresGuildId: false,
+        },
     },
 
     // Command validation schema
     // Used to ensure all commands follow the same structure
     commandSchema: {
         requiredProperties: ['data', 'execute'],
-        optionalProperties: ['cooldown', 'permissions', 'category']
-    }
+        optionalProperties: ['cooldown', 'permissions', 'category'],
+    },
 };

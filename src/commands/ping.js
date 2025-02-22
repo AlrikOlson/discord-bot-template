@@ -13,7 +13,7 @@ module.exports = {
         // Initial response
         const sent = await interaction.reply({ 
             content: 'Pinging...',
-            fetchReply: true 
+            fetchReply: true, 
         });
 
         // Calculate latencies
@@ -28,23 +28,23 @@ module.exports = {
                 { 
                     name: 'WebSocket Latency', 
                     value: `${wsLatency}ms`,
-                    inline: true 
+                    inline: true, 
                 },
                 { 
                     name: 'API Roundtrip', 
                     value: `${roundtripLatency}ms`,
-                    inline: true 
-                }
+                    inline: true, 
+                },
             )
             .setFooter({ 
-                text: `Requested by ${interaction.user.tag}` 
+                text: `Requested by ${interaction.user.tag}`, 
             })
             .setTimestamp();
 
         // Edit the initial reply with the detailed embed
         await interaction.editReply({ 
             content: null, 
-            embeds: [embed] 
+            embeds: [embed], 
         });
-    }
+    },
 };

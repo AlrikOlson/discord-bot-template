@@ -19,7 +19,7 @@ class ErrorHandler {
             .setDescription(`\`\`\`${error.stack || error.message}\`\`\``)
             .addFields(
                 { name: 'Type', value: error.name || 'Unknown', inline: true },
-                { name: 'Environment', value: process.env.NODE_ENV || 'development', inline: true }
+                { name: 'Environment', value: process.env.NODE_ENV || 'development', inline: true },
             )
             .setTimestamp();
 
@@ -28,7 +28,7 @@ class ErrorHandler {
             errorEmbed.addFields({ 
                 name: 'Command', 
                 value: context.command, 
-                inline: true 
+                inline: true, 
             });
         }
 
@@ -36,7 +36,7 @@ class ErrorHandler {
             errorEmbed.addFields({ 
                 name: 'User', 
                 value: `${context.user.tag} (${context.user.id})`, 
-                inline: true 
+                inline: true, 
             });
         }
 
@@ -52,7 +52,7 @@ class ErrorHandler {
         // Return user-friendly error message
         return {
             content: 'An error occurred while processing your request.',
-            ephemeral: true
+            ephemeral: true,
         };
     }
 

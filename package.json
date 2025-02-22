@@ -1,53 +1,54 @@
 {
-    "name": "yet-another-discord-bot-template",
-    "version": "1.0.0",
-    "description": "A Discord bot template that won't completely ruin your day",
-    "main": "src/index.js",
-    "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js",
-        "deploy": "node src/scripts/deploy.js",
-        "deploy:prod": "NODE_ENV=production node src/scripts/deploy.js",
-        "deploy:dev": "NODE_ENV=development node src/scripts/deploy.js",
-        "lint": "eslint src/",
-        "update": "npm update",
-        "clean": "rm -rf node_modules package-lock.json && npm install"
-    },
-    "scripts-comments": {
-        "start": "Runs the bot in production mode",
-        "dev": "Runs the bot with hot-reload for development",
-        "deploy": "Deploys commands based on NODE_ENV (separate from bot runtime)",
-        "deploy:prod": "Deploys commands globally (takes up to 1 hour to propagate)",
-        "deploy:dev": "Deploys commands to development guild (instant update)",
-        "lint": "Checks your code for obvious mistakes",
-        "update": "Updates dependencies to latest version (might break everything)",
-        "clean": "Nuclear option when node_modules gets possessed"
-    },
-    "dependencies": {
-        "discord.js": "^14.14.1",
-        "dotenv": "^16.4.1"
-    },
-    "devDependencies": {
-        "eslint": "^8.56.0",
-        "nodemon": "^3.0.3"
-    },
-    "engines": {
-        "node": ">=16.9.0"
-    },
-    "keywords": [
-        "discord",
-        "bot",
-        "discord.js",
-        "template",
-        "slash-commands"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/yourusername/yet-another-discord-bot-template.git"
-    },
-    "bugs": {
-        "url": "https://github.com/yourusername/yet-another-discord-bot-template/issues"
-    },
-    "author": "Your Name (or don't, I'm not your boss)",
-    "license": "MIT"
+  "name": "yet-another-discord-bot-template",
+  "version": "1.0.0",
+  "description": "A Discord bot template that won't completely ruin your day",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "deploy": "node src/scripts/deploy.js",
+    "deploy:prod": "NODE_ENV=production node src/scripts/deploy.js",
+    "deploy:dev": "NODE_ENV=development node src/scripts/deploy.js",
+    "lint": "eslint src/",
+    "lint-fix": "eslint src/** --fix",
+    "update": "npm update",
+    "clean": "rm -rf node_modules package-lock.json && npm install"
+  },
+  "scripts-comments": {
+    "start": "Runs the bot in production mode",
+    "dev": "Runs the bot with hot-reload for development",
+    "deploy": "Deploys commands based on NODE_ENV (separate from bot runtime)",
+    "deploy:prod": "Deploys commands globally (takes up to 1 hour to propagate)",
+    "deploy:dev": "Deploys commands to development guild (instant update)",
+    "lint": "Checks your code for obvious mistakes",
+    "update": "Updates dependencies to latest version (might break everything)",
+    "clean": "Nuclear option when node_modules gets possessed"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "discord.js",
+    "template",
+    "slash-commands"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/yet-another-discord-bot-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/yet-another-discord-bot-template/issues"
+  },
+  "author": "Your Name (or don't, I'm not your boss)",
+  "license": "MIT"
 }
