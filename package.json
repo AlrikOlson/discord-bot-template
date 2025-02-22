@@ -1,0 +1,21 @@
+{
+    "name": "discord-bot-template",
+    "version": "1.0.0",
+    "description": "A minimal Discord bot template",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "deploy": "node src/deploy-commands.js"
+    },
+    "dependencies": {
+        "discord.js": "^14.18.0",
+        "dotenv": "^16.4.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.3"
+    },
+    "engines": {
+        "node": ">=16.9.0"
+    }
+}
