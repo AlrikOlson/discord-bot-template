@@ -1,176 +1,117 @@
-# Discord Bot Template
+# Yet Another Discord Bot Template
 
-A beginner-friendly Discord bot template using discord.js v14. Don't worry - we'll explain everything you need to know!
+Look, if you're here, you probably want to make a Discord bot. Fine. Here's a template that won't completely ruin your day.
 
-## 🤔 What's This Bot Template For?
+## What's This?
 
-This template helps you create a Discord bot with:
-- Modern slash commands (the ones that start with `/`)
-- Easy setup for both testing and real-world use
-- Built-in error handling
-- A clean, organized structure
+It's a Discord bot template. It does the basic stuff:
+- Slash commands (because Discord killed message commands anyway)
+- Error handling (because your bot WILL break)
+- Some structure (because you'll thank me later)
 
-## 📋 Requirements
+## Requirements
 
-- [Node.js](https://nodejs.org/) version 16.9.0 or newer
-- A Discord account
-- Basic knowledge of JavaScript (but we'll help you through it!)
+- Node.js 16.9.0+ (just use the LTS version, seriously)
+- A Discord account (duh)
+- Basic JavaScript knowledge (or at least the willingness to Google stuff)
 
-## 🔑 Getting Your Discord Bot Tokens
+## Getting Started
 
-Before you start, you'll need some special keys from Discord:
-
-1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click "New Application" and give it a name
-3. Go to the "Bot" section and click "Add Bot"
-4. You'll need these things:
-   - **Token**: Click "Copy" under the bot's token (keep this secret!)
-   - **Client ID**: Found in the "General Information" tab
-   - **Test Server ID** (for development only):
-     1. Open Discord
-     2. Go to your test server
-     3. Right-click the server name
-     4. Click "Copy Server ID" (Enable Developer Mode in Discord settings if you don't see this)
-
-## 📁 Project Structure
-
-Here's what each folder does:
-
-```
-src/
-├── commands/        # Your bot's commands live here
-├── events/         # How your bot responds to different events
-├── scripts/        # Helper scripts (like command deployment)
-├── config.js       # Bot settings
-└── index.js        # The main bot file
-```
-
-## 🚀 Setting Up Your Bot
-
-### 1. Get the Code
-
+1. Clone this thing:
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/AlrikOlson/discord-bot-template
 cd discord-bot-template
 ```
 
-### 2. Install Required Software
-
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-### 3. Set Up Your Secret Keys
+3. Copy `.env.example` to `.env` and fill in your tokens. Don't know where to get them? Fine, here:
+   - Go to [Discord Developer Portal](https://discord.com/developers/applications)
+   - Make a new application
+   - Create a bot
+   - Copy the token
+   - Don't share it (or do, I'm not your mom)
 
-1. Copy `.env.example` to a new file called `.env`
-2. Fill in your keys:
-```env
-TOKEN=your_bot_token
-CLIENT_ID=your_client_id
-GUILD_ID=your_test_server_id  # Only needed for testing
-NODE_ENV=development          # Change to 'production' when ready to go live
+## Project Structure
+
+```
+src/
+├── commands/    # Your commands go here (shocking, I know)
+├── events/      # Event handlers (when stuff happens)
+├── scripts/     # Utility scripts
+├── config.js    # Config that you'll probably never touch
+└── index.js     # The main file. Don't break this one.
 ```
 
-## 🎮 Commands: Development vs Production
+## Development vs Production
 
-There are two ways to add commands to your bot. This is important to understand!
-
-### Development Mode (Testing)
-- Commands only work in your test server
-- Changes appear instantly
-- Perfect for testing
-- Requires your test server's ID (GUILD_ID)
-
-To deploy commands in test mode:
+### Development
 ```bash
-npm run deploy:dev
+npm run dev         # Runs with hot reload
+npm run deploy:dev  # Updates commands instantly
 ```
 
-### Production Mode (Real World)
-- Commands work in all servers
-- Takes up to 1 hour for changes to appear
-- Used when your bot is ready for others to use
-- Doesn't need a server ID
-
-To deploy commands for everyone:
+### Production
 ```bash
-npm run deploy:prod
+npm start           # Just runs the bot
+npm run deploy:prod # Updates commands (takes forever)
 ```
 
-### ⭐ Important to Know
-- When someone adds your bot to their server, they'll get all your production commands automatically
-- You only need to run `deploy:prod` when you change or add commands
-- Keep using `deploy:dev` while testing - it's faster and safer!
+Pick your poison. Development is faster but only works in one server. Production is slower but works everywhere.
 
-## 🏃‍♂️ Running Your Bot
+## Making Commands
 
-### For Testing
-```bash
-npm run dev    # Automatically restarts when you make changes
-```
-
-### For Real World Use
-```bash
-npm start      # Regular bot start
-```
-
-## 📝 Creating Commands
-
-Commands go in `src/commands/`. Here's a simple example:
+Put them in `src/commands/`. Here's a template:
 
 ```javascript
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('hello')
-        .setDescription('Says hello'),
+        .setName('something')
+        .setDescription('does something'),
     category: 'GENERAL',
-    cooldown: 3, // Optional: Wait time between uses (in seconds)
+    cooldown: 3,
     async execute(interaction) {
-        await interaction.reply('Hello there!');
+        await interaction.reply('whatever');
     }
 };
 ```
 
-## ⚙️ Configuration
+## Environment Variables
 
-All bot settings are in `src/config.js`:
-- Command categories
-- Colors for messages
-- Default cooldowns
-- Bot status message
+Look in `.env.example`. Copy it. Rename it to `.env`. Fill in the blanks. Don't overthink it.
 
-## 🛠️ Available Scripts
+| Variable | What | Required? |
+|----------|------|-----------|
+| TOKEN | Bot token | Yes |
+| CLIENT_ID | Application ID | Yes |
+| GUILD_ID | Server ID | Only for testing |
+| NODE_ENV | development/production | Yes |
 
-- `npm run dev`: Start bot in test mode (restarts when you make changes)
-- `npm start`: Start bot normally
-- `npm run deploy:dev`: Update commands in your test server
-- `npm run deploy:prod`: Update commands for all servers
+## Error Handling
 
-## 🔑 Environment Variables Explained
+The bot handles errors so you don't have to. It'll:
+- Tell users something broke
+- Log it somewhere
+- Pretend it meant to do that
 
-| Variable | What It Does | Required? | When Needed |
-|----------|-------------|-----------|-------------|
-| TOKEN | Your bot's secret key | Yes | Always |
-| CLIENT_ID | Your bot's ID | Yes | Always |
-| GUILD_ID | Test server ID | Only for testing | Development |
-| NODE_ENV | `development` or `production` | Yes | Always |
-| ERROR_WEBHOOK_URL | Discord error reporting | No | Optional |
+## Need Help?
 
-## ❌ Error Handling
+1. Read the [Discord.js Guide](https://discordjs.guide/)
+2. Check Stack Overflow
+3. Join Discord.js Discord
+4. Cry
 
-The bot automatically handles errors by:
-- Showing a nice message to users
-- Logging details for you to review
-- Optionally sending errors to a Discord channel
+## License
 
-## 📜 License
+MIT. Go wild.
 
-MIT - Feel free to use this for your own bot!
+## Final Notes
 
-## 🆘 Need Help?
+- Don't share your token
+- Test before deploying
+- When in doubt, turn it off and on again
 
-1. Check the [Discord.js Guide](https://discordjs.guide/)
-2. Join the [Discord.js Discord Server](https://discord.gg/djs)
-3. Look for similar issues in this template's repository
-
-Remember: Never share your bot token with anyone!
+Now go build something. Or don't. Whatever.
