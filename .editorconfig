@@ -1,0 +1,47 @@
+# Yes, this is a thing. No, you can't ignore it.
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+
+# JavaScript/JSON files
+[*.{js,json}]
+indent_style = space
+indent_size = 4
+max_line_length = 100
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# YAML files because GitHub loves them
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Package files
+[package.json]
+indent_style = space
+indent_size = 2
+
+# Environment files
+[.env*]
+insert_final_newline = false
+
+# Don't try to format these
+[{node_modules,dist}/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
+
+# Windows files, if you're into that sort of thing
+[*.{cmd,bat}]
+end_of_line = crlf

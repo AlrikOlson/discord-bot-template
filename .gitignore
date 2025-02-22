@@ -1,16 +1,28 @@
-# Dependencies
+# Dependencies and package management
 node_modules/
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# Environment variables
+# Environment variables and secrets
 .env
 .env.local
-.env.*.local
+.env.*
+!.env.example
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
 # IDE and editor files
 .idea/
@@ -18,6 +30,31 @@ npm-debug.log*
 *.swp
 *.swo
 *~
+.DS_Store
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Debug files
+.node_repl_history
+.npm
+.eslintcache
+
+# Build and output
+dist/
+build/
+out/
+
+# Coverage and test
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
 
 # OS generated files
 .DS_Store
@@ -27,3 +64,9 @@ npm-debug.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+Desktop.ini
+
+# Bot specific
+config.json
+tokens.json
+credentials.json

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discord.js Guide
+    url: https://discordjs.guide/
+    about: RTFM before asking questions, please.
+  - name: Discord.js Documentation
+    url: https://discord.js.org/
+    about: The actual documentation, if you're into that sort of thing.

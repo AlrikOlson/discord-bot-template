@@ -1,70 +1,88 @@
 # Yet Another Discord Bot Template
 
-Look, if you're here, you probably want to make a Discord bot. Fine. Here's a template that won't completely ruin your day.
+Look, if you're here, you probably want to make a Discord bot. Fine. Here's a
+template that won't completely ruin your day.
 
-## What's This?
+## Features (because you asked)
 
-It's a Discord bot template. It does the basic stuff:
-- Slash commands (because Discord killed message commands anyway)
-- Error handling (because your bot WILL break)
-- Some structure (because you'll thank me later)
+-   🚀 Actually works out of the box (shocking, I know)
+-   ⚡ Slash commands (because Discord killed message commands anyway)
+-   🛠️ Development & Production modes (pretend you're professional)
+-   🔥 Hot reload in development (because restarting is for chumps)
+-   🐛 Error handling that makes sense (when stuff breaks)
+-   📁 Logical structure (thank me later)
+-   🚔 ESLint config that will judge your code
+-   🌈 VS Code settings that don't suck
+-   📦 GitHub templates for everything
+-   🔒 Security policy (because we care)
+-   📝 Documentation (that you won't read)
 
 ## Requirements
 
-- Node.js 16.9.0+ (just use the LTS version, seriously)
-- A Discord account (duh)
-- Basic JavaScript knowledge (or at least the willingness to Google stuff)
+-   Node.js 16.9.0+ (just use the LTS version, seriously)
+-   A Discord account (duh)
+-   Basic JavaScript knowledge (or at least the willingness to Google stuff)
+-   A sense of humor (optional but recommended)
 
-## Getting Started
+## Quick Start
 
-1. Clone this thing:
+1. Click that shiny "Use this template" button at the top
+2. Clone your new repo:
+    ```bash
+    git clone https://github.com/your-username/your-bot-name
+    cd your-bot-name
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Copy `.env.example` to `.env` and fill in your tokens:
+    ```bash
+    cp .env.example .env
+    ```
+5. Get your tokens:
+    - Go to
+      [Discord Developer Portal](https://discord.com/developers/applications)
+    - Create a new application
+    - Go to the Bot section
+    - Click "Add Bot"
+    - Copy your token
+    - Don't share it (seriously)
+
+## Development
+
 ```bash
-git clone https://github.com/AlrikOlson/discord-bot-template
-cd discord-bot-template
+npm run dev         # Run with hot reload
+npm run deploy:dev  # Deploy commands to test server
+npm run lint        # Check if your code sucks
+npm run lint:fix    # Fix your sucky code
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+## Production
 
-3. Copy `.env.example` to `.env` and fill in your tokens. Don't know where to get them? Fine, here:
-   - Go to [Discord Developer Portal](https://discord.com/developers/applications)
-   - Make a new application
-   - Create a bot
-   - Copy the token
-   - Don't share it (or do, I'm not your mom)
+```bash
+npm start           # Just run the bot
+npm run deploy:prod # Deploy commands globally (takes forever)
+```
 
 ## Project Structure
 
 ```
-src/
-├── commands/    # Your commands go here (shocking, I know)
-├── events/      # Event handlers (when stuff happens)
-├── scripts/     # Utility scripts
-├── config.js    # Config that you'll probably never touch
-└── index.js     # The main file. Don't break this one.
+├── src/                  # Your code goes here
+│   ├── commands/        # Command files
+│   ├── events/         # Event handlers
+│   ├── scripts/        # Utility scripts
+│   ├── config.js       # Bot configuration
+│   └── index.js        # Entry point
+├── .github/            # GitHub stuff
+├── .vscode/           # VS Code settings
+├── docs/             # Documentation (ha!)
+└── [various config files that you shouldn't touch]
 ```
-
-## Development vs Production
-
-### Development
-```bash
-npm run dev         # Runs with hot reload
-npm run deploy:dev  # Updates commands instantly
-```
-
-### Production
-```bash
-npm start           # Just runs the bot
-npm run deploy:prod # Updates commands (takes forever)
-```
-
-Pick your poison. Development is faster but only works in one server. Production is slower but works everywhere.
 
 ## Making Commands
 
-Put them in `src/commands/`. Here's a template:
+Put them in `src/commands/`. Here's a template because I know you'll ask:
 
 ```javascript
 module.exports = {
@@ -75,43 +93,90 @@ module.exports = {
     cooldown: 3,
     async execute(interaction) {
         await interaction.reply('whatever');
-    }
+    },
 };
 ```
 
 ## Environment Variables
 
-Look in `.env.example`. Copy it. Rename it to `.env`. Fill in the blanks. Don't overthink it.
+Copy `.env.example`, rename to `.env`, fill in the blanks. Don't overthink it.
 
-| Variable | What | Required? |
-|----------|------|-----------|
-| TOKEN | Bot token | Yes |
-| CLIENT_ID | Application ID | Yes |
-| GUILD_ID | Server ID | Only for testing |
-| NODE_ENV | development/production | Yes |
+| Variable          | What                   | Required? | Example                              |
+| ----------------- | ---------------------- | --------- | ------------------------------------ |
+| TOKEN             | Bot token              | Yes       | NzkyNzE1...hvzA.Ovy4                 |
+| CLIENT_ID         | Application ID         | Yes       | 123456789                            |
+| GUILD_ID          | Server ID              | Dev only  | 987654321                            |
+| NODE_ENV          | development/production | Yes       | development                          |
+| ERROR_WEBHOOK_URL | Error logging          | No        | https://discord.com/api/webhooks/... |
 
-## Error Handling
+## Contributing
 
-The bot handles errors so you don't have to. It'll:
-- Tell users something broke
-- Log it somewhere
-- Pretend it meant to do that
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+2. Fork the repo
+3. Make changes
+4. Test them
+5. Create PR
+6. Wait
+7. Maybe ping someone
+8. Get merged (hopefully)
 
-## Need Help?
+## Common Issues
+
+### It's not working
+
+-   Did you install dependencies?
+-   Did you create `.env`?
+-   Did you fill in `.env`?
+-   Did you read the error message?
+
+### Commands aren't showing up
+
+-   Did you deploy them?
+-   Are you in development mode?
+-   Did you invite the bot with applications.commands scope?
+-   Did you wait long enough in production mode?
+
+### ESLint is complaining
+
+-   Fix your code
+-   Or don't, I'm not your boss
+
+## Support
 
 1. Read the [Discord.js Guide](https://discordjs.guide/)
-2. Check Stack Overflow
-3. Join Discord.js Discord
-4. Cry
+2. Check [Discord.js Documentation](https://discord.js.org/)
+3. Google the error
+4. Ask in [Discord.js Discord](https://discord.gg/djs)
+5. Open an issue
+6. Cry
+
+## Security
+
+-   Don't share your token
+-   Don't commit `.env`
+-   Don't use `eval()`
+-   Don't be stupid
+-   Read [SECURITY.md](.github/SECURITY.md)
 
 ## License
 
-MIT. Go wild.
+MIT. See [LICENSE](LICENSE). TL;DR: Do whatever you want, just don't blame me.
+
+## Acknowledgments
+
+-   Discord.js team (for making this possible)
+-   Stack Overflow (for saving our lives)
+-   Coffee (for obvious reasons)
+-   You (for reading this far)
 
 ## Final Notes
 
-- Don't share your token
-- Test before deploying
-- When in doubt, turn it off and on again
+-   Star this repo if you like it
+-   Fork it if you want to improve it
+-   Open issues if you find bugs
+-   Submit PRs if you fix bugs
+-   Don't blame me if something breaks
+-   Have fun!
 
 Now go build something. Or don't. Whatever.
+

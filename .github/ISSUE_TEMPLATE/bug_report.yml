@@ -1,0 +1,73 @@
+name: Bug Report
+description: Something's broken? Fine, tell me about it.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before reporting a bug, please:
+        1. Actually check if it's a bug
+        2. Make sure you're using the latest version
+        3. Search existing issues
+        4. Consider if it's just you doing something wrong
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js Version
+      description: What version of Node.js are you using?
+      placeholder: v16.9.0
+    validations:
+      required: true
+
+  - type: input
+    id: discord-js-version
+    attributes:
+      label: Discord.js Version
+      description: What version of Discord.js are you using?
+      placeholder: v14.14.1
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us what you expected to happen. You know, for context.
+      placeholder: My bot exploded when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce this?
+      description: Give us steps to reproduce this issue. Code examples are good.
+      placeholder: |
+        1. Create a command that...
+        2. Run it with...
+        3. Watch everything break...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted.
+      render: shell
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Final checklist
+      description: Before submitting, please confirm that you...
+      options:
+        - label: Actually read the README
+          required: true
+        - label: Searched for existing issues
+          required: true
+        - label: Are using the latest version
+          required: true
+        - label: Tried turning it off and on again
+          required: true

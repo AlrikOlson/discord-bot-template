@@ -1,0 +1,30 @@
+# Add 'core' label to any change within the 'src' directory
+core:
+- src/**/*
+
+# Add 'command' to any change in commands directory
+command:
+- src/commands/**/*
+
+# Add 'config' to any change to config files
+config:
+- src/config.js
+- .env.example
+
+# Add 'ci' to any change to CI config files
+ci:
+- .github/workflows/**/*
+
+# Add 'docs' to any change to documentation files
+docs:
+- README.md
+- docs/**/*
+
+# Add 'dependencies' to any change to package files
+dependencies:
+- package.json
+- package-lock.json
+
+# Add 'scripts' to any change in scripts directory
+scripts:
+- src/scripts/**/*
