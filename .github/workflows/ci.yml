@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   # Allow manual trigger because why not
   workflow_dispatch:
 
@@ -19,41 +19,41 @@ jobs:
         node-version: [16.x, 18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v4
-      
-    - name: Using Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Install dependencies (if you haven't broken package.json)
-      run: npm ci
-      
-    - name: Check if you can write JavaScript
-      run: npm run lint
-      
-    - name: Run tests (if you bothered to write any)
-      run: |
-        if [ -f "package.json" ] && grep -q "\"test\":" "package.json"; then
-          npm test
-        else
-          echo "No tests found. You should feel bad."
-          exit 0
-        fi
+      - uses: actions/checkout@v4
+
+      - name: Using Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          # Remove cache option since we don't have a lock file yet
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check if you can write JavaScript
+        run: npm run lint
+
+      - name: Run tests (if they exist)
+        run: |
+          if [ -f "package.json" ] && grep -q "\"test\":" "package.json"; then
+            npm test
+          else
+            echo "No tests found. You should feel bad."
+            exit 0
+          fi
 
   # Add a security scan because we're pretending to be professional
   security:
     name: Security Scan
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-      
-    - name: Run security scan
-      uses: snyk/actions/node@master
-      continue-on-error: true # Let's be honest, nobody will fix these
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - uses: actions/checkout@v4
+
+      - name: Run security scan
+        uses: snyk/actions/node@master
+        continue-on-error: true # Let's be honest, nobody will fix these
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
   # Auto-approve dependabot because YOLO
   approve-dependabot:
@@ -62,16 +62,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'
     steps:
-    - uses: hmarr/auto-approve-action@v3
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   # Label PRs because organization
   labeler:
     name: Label PRs
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler.yml
+      - uses: actions/labeler@v4
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          configuration-path: .github/labeler.yml
+
