@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { categories, colors } = require('../config');
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { categories, colors } from '../config.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('help')
         .setDescription('Shows all available commands')
