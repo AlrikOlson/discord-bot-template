@@ -79,6 +79,8 @@ npm run lint        # Check code quality
 npm run lint:fix    # Fix code style
 ```
 
+````
+
 ## 🚀 Production
 
 ```bash
@@ -150,7 +152,6 @@ src/
 | LOG_FORMAT    | Log format     | No       | json                   |
 | LOG_MAX_FILES | Max log files  | No       | 5                      |
 | LOG_MAX_SIZE  | Max log size   | No       | 5m                     |
-| SENTRY_DSN    | Sentry DSN     | No       | https://sentry.io/...  |
 
 ## 🤝 Contributing
 
@@ -183,4 +184,6 @@ MIT. See [LICENSE](LICENSE).
   <i>Star ⭐ this repository if you found it helpful!</i>
 </div>
 ```
+
+````
 
