@@ -1,50 +1,42 @@
-# Contributing
+# Contributing Guidelines
 
-So you want to contribute? Fine. Here's how to not mess it up.
+Thank you for considering contributing to this project. Here's how you can help.
 
-## Ground Rules
+## Standards
 
-1. Don't be a jerk
-2. Write decent commit messages
-3. Follow the style guide (or ESLint will yell at you)
-4. Test your stuff
-5. Document your stuff (future you will thank you)
+1. Follow the code style guidelines
+2. Write meaningful commit messages
+3. Maintain test coverage
+4. Update documentation
+5. Follow security best practices
 
 ## Development Process
 
-1. Fork the repo
-2. Create a branch
+1. Fork the repository
+2. Create your feature branch
     ```bash
-    git checkout -b feature/something-awesome
+    git checkout -b feature/your-feature-name
     ```
-3. Write your code
-4. Make sure it works
-5. Make sure ESLint is happy
+3. Develop your changes
+4. Test thoroughly
+5. Ensure code quality
     ```bash
     npm run lint
     ```
-6. Commit your changes
-
+6. Commit with conventional format
     ```bash
-    git commit -m "feat: added something awesome"
+    git commit -m "feat: add new feature"
     ```
-
-    Yes, we use conventional commits. Deal with it.
-
 7. Push to your fork
     ```bash
-    git push origin feature/something-awesome
+    git push origin feature/your-feature-name
     ```
-8. Create a Pull Request
+8. Submit a Pull Request
 
-## Commit Messages
+## Commit Message Format
 
-We use [Conventional Commits](https://www.conventionalcommits.org/). Why?
-Because:
-
--   It makes the changelog readable
--   It makes version bumps automatic
--   It makes you look professional
+We use [Conventional Commits](https://www.conventionalcommits.org/)
+specification.
 
 Format:
 
@@ -60,65 +52,61 @@ Types:
 
 -   `feat`: New feature
 -   `fix`: Bug fix
--   `docs`: Documentation only
+-   `docs`: Documentation
 -   `style`: Code style changes
--   `refactor`: Code changes that neither fix bugs nor add features
+-   `refactor`: Code refactoring
 -   `perf`: Performance improvements
--   `test`: Adding or fixing tests
--   `chore`: Maintenance stuff
+-   `test`: Adding/fixing tests
+-   `chore`: Maintenance tasks
 
 Example:
 
 ```
-feat(commands): add ability to pat the bot
+feat(commands): implement user profile command
 
-Because everyone needs headpats.
+Add ability to view user profiles with detailed information.
 
-Closes #42
+Closes #123
 ```
 
 ## Pull Request Process
 
-1. Update the README.md if needed
-2. Update the version number if needed
-3. Make sure CI passes
-4. Get someone to review your code
-5. Wait
-6. Wait some more
-7. Maybe ping someone
-8. Get merged (hopefully)
+1. Update documentation
+2. Update version numbers
+3. Ensure CI passes
+4. Obtain code review
+5. Address feedback
+6. Await approval
+7. Merge upon approval
 
 ## Code Style
 
--   We use ESLint
--   We use Prettier
--   We use EditorConfig
--   We use 4 spaces (fight me)
--   We use single quotes
--   We use semicolons
+-   ESLint configuration provided
+-   Prettier formatting
+-   EditorConfig settings
+-   4-space indentation
+-   Single quotes
+-   Semicolons required
 
-Just run:
+Run:
 
 ```bash
 npm run lint
 ```
 
-And fix what it complains about.
-
 ## Questions?
 
-1. Check the README
-2. Check the docs
-3. Check the issues
-4. Ask in Discord
-5. Figure it out yourself
+1. Check existing documentation
+2. Review open issues
+3. Create a new issue
+4. Join our Discord community
 
 ## Final Notes
 
--   Don't commit directly to main
--   Don't commit sensitive data
--   Don't commit node_modules
--   Don't be that person who breaks the build
+-   Main branch is protected
+-   Security is paramount
+-   Tests are required
+-   Documentation is essential
 
-Thanks for contributing! Or at least thinking about it.
+Thank you for contributing!
 

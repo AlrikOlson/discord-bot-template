@@ -1,83 +1,73 @@
 # Changelog
 
-All notable changes to this project will be documented in this file, assuming
-someone remembers to update it.
+All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html), or at least tries
-to.
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - YYYY-MM-DD
+## [1.0.0] - 2025-02-21
 
 ### Added
 
 -   Initial release
--   Basic command handling that actually works
--   Error handling that might work
--   Some example commands that do things
--   A README that you probably won't read
--   Development and production environments because we're professionals
--   GitHub templates for when things inevitably break
--   A bunch of configuration files that you shouldn't touch
--   This changelog that will probably be forgotten
+-   Command handling system
+-   Error handling framework
+-   Example commands implementation
+-   Development and production environments
+-   GitHub workflow templates
+-   Configuration system
+-   Documentation
 
 ### Changed
 
--   Nothing, this is the first version
--   Your expectations, probably
+-   N/A (Initial Release)
 
 ### Deprecated
 
--   Your old way of making Discord bots
--   Message commands (thanks Discord)
+-   Message-based commands (Discord API change)
 
 ### Removed
 
--   All the bugs (hopefully)
--   Your excuses for not using TypeScript
--   The need to write boilerplate code
+-   N/A (Initial Release)
 
 ### Fixed
 
--   Nothing was broken because this is the first version
--   (This is a lie, but we're staying positive)
+-   N/A (Initial Release)
 
 ### Security
 
--   Basic security measures
--   Your sanity (maybe)
+-   Environment variable management
+-   Token security measures
+-   Basic security policies
 
 ## [Unreleased]
 
 ### Added
 
--   More TODO items
--   More things to fix later
--   More features you'll probably never use
+-   Additional features in development
 
 ### Changed
 
--   Some stuff, probably
--   The version number, obviously
+-   Ongoing improvements
 
 ### Fixed
 
--   Hopefully something
+-   Continuous refinements
 
-## Notes
+## Notation Guide
 
--   Breaking changes will be marked with 🚨
--   Deprecations will be marked with ⚠️
--   Security updates will be marked with 🔒
--   Features will be marked with ✨
--   Bug fixes will be marked with 🐛
--   Documentation updates will be marked with 📝
+-   🚨 Breaking changes
+-   ⚠️ Deprecations
+-   🔒 Security updates
+-   ✨ New features
+-   🐛 Bug fixes
+-   📝 Documentation
 
 ## Version History
 
--   [1.0.0] - The one that started it all
--   [Unreleased] - The one that's not done yet
+-   [1.0.0] - Initial Release
+-   [Unreleased] - Development Version
 
 [1.0.0]: https://github.com/yourusername/your-repo-name/releases/tag/v1.0.0
 [Unreleased]:

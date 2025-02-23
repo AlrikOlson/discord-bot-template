@@ -2,109 +2,97 @@
 
 ## Supported Versions
 
-Look, we're trying our best here. Generally, only the latest version gets
-security updates.
+Only the latest version receives security updates.
 
 | Version  | Supported          |
 | -------- | ------------------ |
 | Latest   | :white_check_mark: |
 | < Latest | :x:                |
 
-## Reporting a Vulnerability
+## Reporting a Security Vulnerability
 
-Found a security issue? Great (well, not great, but you know what I mean).
+### Proper Channels
 
-### Do:
-
-1. Go to the Security tab
+1. Use the Security tab
 2. Click "Report a vulnerability"
-3. Give us details about what's broken
-4. Wait patiently
-5. Don't tell the bad guys
+3. Provide detailed information
+4. Await response
+5. Maintain confidentiality
 
-### Don't:
+### Prohibited Actions
 
-1. Create a public issue
-2. Post about it on Twitter
-3. Try to hack our users
-4. Demand a bounty (we're broke)
+1. Creating public issues
+2. Sharing vulnerabilities publicly
+3. Exploiting vulnerabilities
+4. Publishing proof-of-concept code
 
-### What to Expect
+### Response Process
 
--   We'll try to respond within 48 hours
--   We'll probably panic a bit
--   We'll try to fix it ASAP
--   We'll credit you (unless you don't want us to)
+-   Initial response within 48 hours
+-   Regular updates on progress
+-   Immediate action on critical issues
+-   Credit given upon request
 
 ### Priority Levels
 
--   **Critical**: Bot token leaked, RCE, etc.
-    -   Response: Drop everything and fix it
-    -   Timeline: ASAP
--   **High**: Auth bypass, data exposure
-    -   Response: Pretty urgent
-    -   Timeline: 24-48 hours
--   **Medium**: Rate limiting issues, spam potential
-    -   Response: Important but not urgent
-    -   Timeline: Within a week
--   **Low**: Aesthetic issues, minor optimizations
-    -   Response: When we get to it
-    -   Timeline: Eventually™
+**Critical**
+
+-   Token exposure, RCE
+-   Response: Immediate
+-   Timeline: < 24 hours
+
+**High**
+
+-   Authentication bypass
+-   Response: Urgent
+-   Timeline: < 48 hours
+
+**Medium**
+
+-   Rate limiting issues
+-   Response: Normal
+-   Timeline: < 1 week
+
+**Low**
+
+-   Minor optimizations
+-   Response: Best effort
+-   Timeline: As available
 
 ## Security Best Practices
 
-If you're using this template:
+### Token Security
 
-1. **Bot Token**
+-   Store securely
+-   Never commit
+-   Rotate if exposed
+-   Use environment variables
 
-    - Keep it secret
-    - Keep it safe
-    - Rotate it if leaked
-    - Don't commit it (yes, people still do this)
+### Dependencies
 
-2. **Dependencies**
+-   Regular updates
+-   Security audits
+-   Trusted sources
+-   Version locking
 
-    - Keep them updated
-    - Check for vulnerabilities (`npm audit`)
-    - Don't install sketchy packages
-    - Yes, even if they have cool icons
+### Permissions
 
-3. **Permissions**
+-   Principle of least privilege
+-   Regular audits
+-   Careful scoping
+-   No default admin
 
-    - Use the minimum required
-    - Don't ask for admin
-    - Seriously, don't ask for admin
-    - Did we mention not to ask for admin?
+### Environment
 
-4. **Environment Variables**
+-   Separate configurations
+-   Secure secrets
+-   Regular rotation
+-   Environment isolation
 
-    - Use .env files
-    - Don't commit them
-    - Keep production secrets separate
-    - Rotate them regularly
+### Code Security
 
-5. **Code**
-    - Validate input
-    - Sanitize output
-    - Don't eval() user input
-    - Don't use deprecated features
-
-## Known Issues
-
--   Your bot might become self-aware
--   It might develop feelings
--   It might judge your code
--   It might be right
-
-## Acknowledgments
-
-Thanks to:
-
--   People who report issues
--   People who fix issues
--   People who create issues (unintentionally)
--   Coffee
-
-Remember: Security is like a joke - if you have to explain it, it's probably
-bad.
+-   Input validation
+-   Output sanitization
+-   No eval() usage
+-   Updated dependencies
 

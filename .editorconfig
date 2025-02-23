@@ -1,7 +1,7 @@
-# Yes, this is a thing. No, you can't ignore it.
+# EditorConfig: https://editorconfig.org
 root = true
 
-# Unix-style newlines with a newline ending every file
+# Universal settings
 [*]
 end_of_line = lf
 insert_final_newline = true
@@ -19,7 +19,7 @@ max_line_length = 100
 trim_trailing_whitespace = false
 max_line_length = off
 
-# YAML files because GitHub loves them
+# YAML files
 [*.{yml,yaml}]
 indent_style = space
 indent_size = 2
@@ -33,7 +33,7 @@ indent_size = 2
 [.env*]
 insert_final_newline = false
 
-# Don't try to format these
+# Build and dependency directories
 [{node_modules,dist}/**]
 charset = unset
 end_of_line = unset
@@ -42,6 +42,6 @@ trim_trailing_whitespace = unset
 indent_style = unset
 indent_size = unset
 
-# Windows files, if you're into that sort of thing
+# Windows files
 [*.{cmd,bat}]
 end_of_line = crlf

@@ -11,15 +11,15 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
-        // Stuff that will actually break your code
+        // Error Prevention
         'no-unused-vars': ['warn', {
             'argsIgnorePattern': '^_',
             'varsIgnorePattern': '^_',
         }],
         'no-undef': 'error',
-        'no-var': 'error', // It's not 2010 anymore
+        'no-var': 'error',
 
-        // Things that make your code look like you know what you're doing
+        // Code Style
         'indent': ['error', 4, {
             'SwitchCase': 1,
             'ignoredNodes': ['TemplateLiteral'],
@@ -28,9 +28,7 @@ module.exports = {
             'avoidEscape': true,
             'allowTemplateLiterals': true,
         }],
-        'semi': ['error', 'always'], // Fight me
-
-        // Because we pretend to care about clean code
+        'semi': ['error', 'always'],
         'no-multiple-empty-lines': ['error', {
             'max': 2,
             'maxEOF': 1,
@@ -38,15 +36,15 @@ module.exports = {
         'eol-last': ['error', 'always'],
         'comma-dangle': ['error', 'always-multiline'],
 
-        // Console logs are fine, this isn't production... oh wait
+        // Environment-specific
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 
-        // Async/Promise stuff because everyone gets it wrong
+        // Async/Promise
         'require-await': 'error',
         'no-return-await': 'error',
         'no-async-promise-executor': 'error',
 
-        // Things that make senior devs cry
+        // Code Quality
         'max-len': ['warn', {
             'code': 100,
             'ignoreComments': true,
@@ -56,19 +54,18 @@ module.exports = {
         }],
         'complexity': ['warn', 15],
 
-        // Security stuff because we're responsible adults
+        // Security
         'no-eval': 'error',
         'no-implied-eval': 'error',
         'no-new-func': 'error',
 
-        // Discord.js specific
+        // Discord.js Specific
         'no-shadow': ['error', {
-            'allow': ['message', 'interaction'], // Because Discord.js loves these names
+            'allow': ['message', 'interaction'],
         }],
     },
     overrides: [
         {
-            // Config files can be messy, we don't judge
             files: ['config.js'],
             rules: {
                 'max-len': 'off',
@@ -76,16 +73,14 @@ module.exports = {
             },
         },
         {
-            // Command files have their own style
             files: ['src/commands/*.js'],
             rules: {
                 'max-len': ['warn', {
-                    'code': 120, // Commands get more space because Discord descriptions are long
+                    'code': 120,
                 }],
             },
         },
     ],
-    // Things we might care about later
     globals: {
         'NodeJS': true,
         'Discord': true,
