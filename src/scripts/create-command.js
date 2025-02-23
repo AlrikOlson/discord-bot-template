@@ -6,6 +6,8 @@ import ora from 'ora';
 import gradient from 'gradient-string';
 import figlet from 'figlet';
 import { categories, colors } from '../config.js';
+import { env } from '../config/env.js';
+import logger from '../utils/logger.js';
 import { promisify } from 'util';
 import { fileURLToPath } from 'url';
 
@@ -26,7 +28,7 @@ const showBanner = () => {
             verticalLayout: 'default',
         }, (err, data) => {
             if (err) {
-                console.log('Something went wrong...');
+                logger.error('Failed to generate banner', { error: err });
                 resolve();
                 return;
             }
@@ -67,7 +69,7 @@ export default {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            console.error(\`Error in ${name} command:\`, error);
+            logger.error(\`Error in ${name} command:\`, error);
             await interaction.reply({
                 content: 'An error occurred while executing this command.',
                 ephemeral: true,
@@ -194,9 +196,10 @@ async function createCommand() {
         console.log(chalk.dim('1. Review your command at:'));
         console.log(chalk.yellow(`   ${filePath}`));
         console.log(chalk.dim('2. Deploy your command with:'));
-        console.log(chalk.yellow('   npm run deploy:dev'));
+        console.log(chalk.yellow(`   npm run deploy:${env.NODE_ENV === 'production' ? 'prod' : 'dev'}`));
 
     } catch (error) {
+        logger.error('Failed to create command:', error);
         console.error(chalk.red('\n❌ Error creating command:'));
         console.error(chalk.dim(error.message));
         process.exit(1);

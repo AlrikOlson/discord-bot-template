@@ -10,6 +10,7 @@
   <img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?style=for-the-badge&logo=node.js&logoColor=white"/>
   <img src="https://img.shields.io/badge/discord.js-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white"/>
   <img src="https://img.shields.io/badge/ESLint-%234B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Winston-%23000000.svg?style=for-the-badge&logo=node.js&logoColor=white"/>
 </div>
 
 ## 🚀 Quick Setup
@@ -53,13 +54,14 @@
 -   ⚡ Slash command support
 -   🛠️ Development & Production environments
 -   🔥 Hot reload for development
--   🐛 Comprehensive error handling
+-   📝 Comprehensive logging system
+-   🐛 Advanced error handling
 -   📁 Organized project structure
 -   🚔 ESLint configuration
 -   🌈 VS Code integration
 -   📦 GitHub workflow templates
 -   🔒 Security best practices
--   📝 Detailed documentation
+-   📚 Detailed documentation
 
 ## 📋 Requirements
 
@@ -84,6 +86,45 @@ npm start           # Start the bot
 npm run deploy:prod # Deploy commands globally
 ```
 
+## 📊 Logging System
+
+The bot uses Winston for advanced logging capabilities:
+
+### Log Files
+
+-   `logs/combined.log`: All logs
+-   `logs/error.log`: Error-level logs only
+-   `logs/exceptions.log`: Uncaught exceptions
+-   `logs/rejections.log`: Unhandled rejections
+
+### Log Management Commands
+
+```bash
+npm run logs:all        # Watch all logs
+npm run logs:error      # Watch error logs
+npm run logs:exceptions # Watch exception logs
+npm run logs:rejections # Watch rejection logs
+npm run logs:clean      # Clear all logs
+```
+
+### Log Levels
+
+-   `error`: Error conditions
+-   `warn`: Warning conditions
+-   `info`: Normal but significant
+-   `debug`: Debugging information
+
+### Configuration
+
+Configure logging in `.env`:
+
+```env
+LOG_LEVEL=info          # Log level (debug, info, warn, error)
+LOG_FORMAT=json         # Log format (json or pretty)
+LOG_MAX_FILES=5         # Maximum number of log files
+LOG_MAX_SIZE=5m         # Maximum size of each log file
+```
+
 ## 📁 Project Structure
 
 ```
@@ -91,19 +132,25 @@ src/
 ├── commands/     # Command files
 ├── events/      # Event handlers
 ├── scripts/     # Utility scripts
+├── utils/       # Utility functions
+│   └── logger.js # Logging configuration
 ├── config.js    # Bot configuration
 └── index.js     # Entry point
 ```
 
 ## 🔧 Environment Variables
 
-| Variable          | Description    | Required | Example                 |
-| ----------------- | -------------- | -------- | ----------------------- |
-| TOKEN             | Bot token      | Yes      | NzkyNzE1...             |
-| CLIENT_ID         | Application ID | Yes      | 123456789               |
-| GUILD_ID          | Server ID      | Dev only | 987654321               |
-| NODE_ENV          | Environment    | Yes      | development/production  |
-| ERROR_WEBHOOK_URL | Error logging  | No       | https://discord.com/... |
+| Variable      | Description    | Required | Example                |
+| ------------- | -------------- | -------- | ---------------------- |
+| TOKEN         | Bot token      | Yes      | NzkyNzE1...            |
+| CLIENT_ID     | Application ID | Yes      | 123456789              |
+| GUILD_ID      | Server ID      | Dev only | 987654321              |
+| NODE_ENV      | Environment    | Yes      | development/production |
+| LOG_LEVEL     | Logging level  | No       | info                   |
+| LOG_FORMAT    | Log format     | No       | json                   |
+| LOG_MAX_FILES | Max log files  | No       | 5                      |
+| LOG_MAX_SIZE  | Max log size   | No       | 5m                     |
+| SENTRY_DSN    | Sentry DSN     | No       | https://sentry.io/...  |
 
 ## 🤝 Contributing
 

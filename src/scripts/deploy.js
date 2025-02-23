@@ -1,11 +1,9 @@
-import dotenv from 'dotenv';
 import { REST, Routes } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-// Initialize dotenv
-dotenv.config();
+import { env } from '../config/env.js';
+import logger from '../utils/logger.js';
 
 // ES Module dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -21,8 +19,8 @@ const __dirname = path.dirname(__filename);
  * 4. Resource Management: Keeps deployment code out of the running bot's memory
  *
  * Usage:
- * - Development: npm run deploy (instantly updates commands in your test server)
- * - Production: npm run deploy (updates global commands, takes up to 1 hour to propagate)
+ * - Development: npm run deploy:dev (instantly updates commands in your test server)
+ * - Production: npm run deploy:prod (updates global commands, takes up to 1 hour to propagate)
  */
 
 const commands = [];
@@ -39,41 +37,40 @@ for (const file of commandFiles) {
 
     if ('data' in command && 'execute' in command) {
         commands.push(command.data.toJSON());
-        console.log(`Loaded command: ${command.data.name}`);
+        logger.info(`Loaded command: ${command.data.name}`);
     } else {
-        console.log(`[WARNING] Command at ${file} is missing required properties`);
+        logger.warn(`Command at ${file} is missing required properties`);
     }
 }
 
-const rest = new REST().setToken(process.env.TOKEN);
+const rest = new REST().setToken(env.TOKEN);
 
 // Deploy commands
 try {
-    console.log(`Started refreshing ${commands.length} application (/) commands.`);
+    logger.info(`Started refreshing ${commands.length} application (/) commands.`);
 
     let data;
-    if (process.env.NODE_ENV === 'production') {
+    if (env.NODE_ENV === 'production') {
         // Global commands - can take up to 1 hour to update
-        console.log('\x1b[33m%s\x1b[0m', 'Deploying GLOBAL commands (can take up to 1 hour to propagate)...');
+        logger.info('Deploying GLOBAL commands (can take up to 1 hour to propagate)...');
         data = await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID),
+            Routes.applicationCommands(env.CLIENT_ID),
             { body: commands },
         );
     } else {
         // Guild-specific commands - update instantly
-        if (!process.env.GUILD_ID) {
+        if (!env.GUILD_ID) {
             throw new Error('GUILD_ID is required for development environment');
         }
-        console.log('\x1b[36m%s\x1b[0m', 'Deploying GUILD commands (development mode - instant update)...');
+        logger.info('Deploying GUILD commands (development mode - instant update)...');
         data = await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+            Routes.applicationGuildCommands(env.CLIENT_ID, env.GUILD_ID),
             { body: commands },
         );
     }
 
-    console.log('\x1b[32m%s\x1b[0m', `Successfully reloaded ${data.length} application (/) commands.`);
+    logger.info(`Successfully reloaded ${data.length} application (/) commands.`);
 } catch (error) {
-    console.error('\x1b[31m%s\x1b[0m', 'Error deploying commands:');
-    console.error(error);
+    logger.error('Error deploying commands:', error);
     process.exit(1);
 }

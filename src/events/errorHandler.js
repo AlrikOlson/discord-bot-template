@@ -1,85 +1,86 @@
-import { EmbedBuilder, WebhookClient } from 'discord.js';
-import { colors } from '../config.js';
-
-// Optional: Create a webhook for logging errors to a Discord channel
-const errorWebhook = process.env.ERROR_WEBHOOK_URL
-    ? new WebhookClient({ url: process.env.ERROR_WEBHOOK_URL })
-    : null;
+import { randomUUID } from 'crypto';
+import logger from '../utils/logger.js';
+import { env } from '../config/env.js';
 
 class ErrorHandler {
     static async handleError(error, context = {}) {
-        // Log to console
-        console.error('Error occurred:', error);
-        console.error('Context:', context);
+        // Generate unique error ID for tracking
+        const errorId = randomUUID();
 
-        // Format error for logging
-        const errorEmbed = new EmbedBuilder()
-            .setColor(colors.error)
-            .setTitle('Error Occurred')
-            .setDescription(`\`\`\`${error.stack || error.message}\`\`\``)
-            .addFields(
-                { name: 'Type', value: error.name || 'Unknown', inline: true },
-                { name: 'Environment', value: process.env.NODE_ENV || 'development', inline: true },
-            )
-            .setTimestamp();
+        // Create structured error object
+        const errorDetails = {
+            id: errorId,
+            timestamp: new Date().toISOString(),
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+            context,
+            environment: env.NODE_ENV,
+        };
 
-        // Add context information if available
-        if (context.command) {
-            errorEmbed.addFields({
-                name: 'Command',
-                value: context.command,
-                inline: true,
-            });
-        }
+        // Log the error with all details
+        // Wrap in Promise to ensure async operation
+        await new Promise((resolve) => {
+            logger.error('Error occurred', errorDetails);
+            resolve();
+        });
 
-        if (context.user) {
-            errorEmbed.addFields({
-                name: 'User',
-                value: `${context.user.tag} (${context.user.id})`,
-                inline: true,
-            });
-        }
-
-        // Log to Discord webhook if available
-        if (errorWebhook) {
-            try {
-                await errorWebhook.send({ embeds: [errorEmbed] });
-            } catch (webhookError) {
-                console.error('Failed to send error to webhook:', webhookError);
-            }
-        }
-
-        // Return user-friendly error message
+        // Return user-friendly message with error ID for reference
         return {
-            content: 'An error occurred while processing your request.',
+            content: env.NODE_ENV === 'development'
+                ? `An error occurred (ID: ${errorId})\n\`\`\`${error.stack}\`\`\``
+                : `An error occurred (ID: ${errorId}). If this persists, please report this ID to the bot administrators.`,
             ephemeral: true,
         };
     }
 
     static initializeProcessErrorHandlers(client) {
-        // Handle promise rejections
-        process.on('unhandledRejection', (error) => {
-            this.handleError(error, { type: 'Unhandled Promise Rejection' });
-        });
-
-        // Handle uncaught exceptions
-        process.on('uncaughtException', (error) => {
-            this.handleError(error, { type: 'Uncaught Exception' });
-            // Give time for error to be logged before exiting
-            setTimeout(() => process.exit(1), 1000);
-        });
+        logger.info('Initializing error handlers');
 
         // Handle cleanup before shutdown
-        const cleanup = async () => {
-            console.log('Shutting down gracefully...');
-            if (client) {
-                await client.destroy();
+        const cleanup = async (signal) => {
+            try {
+                logger.info(`Received ${signal}. Shutting down gracefully...`);
+
+                if (client) {
+                    await client.destroy();
+                    logger.info('Discord client destroyed');
+                }
+
+                // Flush logs synchronously before exit
+                logger.info('Shutdown complete');
+                logger.end(); // Add this line to flush logs
+
+                // Exit immediately after ensuring logs are written
+                process.exit(0);
+            } catch (error) {
+                logger.error('Error during shutdown:', error);
+                process.exit(1);
             }
-            process.exit(0);
         };
 
-        process.on('SIGINT', cleanup);
-        process.on('SIGTERM', cleanup);
+        // Process handlers
+        process.on('SIGINT', () => cleanup('SIGINT'));
+        process.on('SIGTERM', () => cleanup('SIGTERM'));
+
+        // Additional error logging for unhandled cases
+        process.on('unhandledRejection', (error) => {
+            logger.error('Unhandled Promise Rejection', {
+                error: error instanceof Error ? error.stack : error,
+            });
+        });
+
+        process.on('uncaughtException', (error) => {
+            logger.error('Uncaught Exception', {
+                error: error instanceof Error ? error.stack : error,
+            });
+            // Exit after uncaught exception
+            setTimeout(() => {
+                process.exit(1);
+            }, 1000);
+        });
+
+        logger.info('Error handlers initialized');
     }
 }
 
