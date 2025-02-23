@@ -1,13 +1,11 @@
-import dotenv from 'dotenv';
 import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import config from './config.js';
+import { env } from './config/env.js';
 import ErrorHandler from './events/errorHandler.js';
-
-// Initialize dotenv
-dotenv.config();
+import logger from './utils/logger.js';
 
 // ES Module dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -46,12 +44,19 @@ class Bot {
      * Initializes all bot systems and handlers
      */
     async initialize() {
-        // Initialize error handlers first
-        ErrorHandler.initializeProcessErrorHandlers(this.client);
+        try {
+            // Initialize error handlers first
+            ErrorHandler.initializeProcessErrorHandlers(this.client);
 
-        await this.loadCommands();
-        this.setupEventHandlers();
-        this.setupCooldowns();
+            await this.loadCommands();
+            this.setupEventHandlers();
+            this.setupCooldowns();
+
+            logger.info('Bot systems initialized successfully');
+        } catch (error) {
+            logger.error('Failed to initialize bot systems', { error });
+            process.exit(1);
+        }
     }
 
     /**
@@ -71,14 +76,14 @@ class Bot {
 
                 if ('data' in command && 'execute' in command) {
                     this.client.commands.set(command.data.name, command);
-                    console.log(`Loaded command: ${command.data.name}`);
+                    logger.info(`Loaded command: ${command.data.name}`);
                 } else {
-                    console.warn(`[WARNING] Command at ${file} is missing required properties`);
+                    logger.warn(`Command at ${file} is missing required properties`);
                 }
             }
         } catch (error) {
-            console.error('Error loading commands:', error);
-            process.exit(1);
+            logger.error('Error loading commands', { error });
+            throw error; // Rethrow to be caught in initialize()
         }
     }
 
@@ -87,6 +92,7 @@ class Bot {
      */
     setupCooldowns() {
         this.client.cooldowns = new Collection();
+        logger.debug('Cooldown system initialized');
     }
 
     /**
@@ -128,7 +134,7 @@ class Bot {
     setupEventHandlers() {
         // Ready event
         this.client.once('ready', () => {
-            console.log(`Logged in as ${this.client.user.tag}`);
+            logger.info(`Logged in as ${this.client.user.tag}`);
             this.setPresence();
         });
 
@@ -139,6 +145,14 @@ class Bot {
             const command = this.client.commands.get(interaction.commandName);
             if (!command) return;
 
+            // Log command usage
+            logger.info('Command executed', {
+                command: interaction.commandName,
+                user: interaction.user.tag,
+                guild: interaction.guild?.name,
+                channel: interaction.channel?.name,
+            });
+
             // Check cooldown before executing command
             if (this.handleCooldown(interaction, command)) return;
 
@@ -147,9 +161,9 @@ class Bot {
             } catch (error) {
                 const errorResponse = await ErrorHandler.handleError(error, {
                     command: interaction.commandName,
-                    user: interaction.user,
-                    guild: interaction.guild,
-                    channel: interaction.channel,
+                    user: interaction.user.tag,
+                    guild: interaction.guild?.name,
+                    channel: interaction.channel?.name,
                 });
 
                 if (interaction.replied || interaction.deferred) {
@@ -172,6 +186,8 @@ class Bot {
                 shardId: shardId,
             });
         });
+
+        logger.info('Event handlers setup complete');
     }
 
     /**
@@ -183,8 +199,9 @@ class Bot {
                 activities: config.presence.activities,
                 status: config.presence.status,
             });
+            logger.info('Bot presence updated successfully');
         } catch (error) {
-            console.error('Failed to set presence:', error);
+            logger.error('Failed to set presence', { error });
         }
     }
 
@@ -193,14 +210,13 @@ class Bot {
      */
     async start() {
         try {
-            // Log startup mode
-            console.log(`Starting bot in ${process.env.NODE_ENV} mode`);
-            console.log('Note: Command deployment is handled separately via "npm run deploy"');
+            logger.info(`Starting bot in ${env.NODE_ENV} mode`);
+            logger.info('Note: Command deployment is handled separately via "npm run deploy"');
 
             // Login to Discord
-            await this.client.login(process.env.TOKEN);
+            await this.client.login(env.TOKEN);
         } catch (error) {
-            console.error('Failed to start bot:', error);
+            logger.error('Failed to start bot', { error });
             process.exit(1);
         }
     }

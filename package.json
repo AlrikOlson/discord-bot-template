@@ -5,6 +5,7 @@
   "description": "A production-ready Discord bot template with modern features and best practices",
   "main": "src/index.js",
   "scripts": {
+    "prepare": "node src/scripts/init.js",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "deploy": "node src/scripts/deploy.js",
@@ -14,24 +15,38 @@
     "lint:fix": "eslint src/** --fix",
     "update": "npm update",
     "clean": "rimraf node_modules package-lock.json && npm install",
-    "create-command": "node src/scripts/create-command.js"
+    "create-command": "node src/scripts/create-command.js",
+    "logs:clean": "node src/scripts/clean-logs.js",
+    "logs:error": "tail -f logs/error.log | pino-pretty",
+    "logs:all": "tail -f logs/combined.log | pino-pretty",
+    "logs:exceptions": "tail -f logs/exceptions.log | pino-pretty",
+    "logs:rejections": "tail -f logs/rejections.log | pino-pretty"
   },
   "scripts-comments": {
+    "prepare": "Initialize required directories",
     "start": "Production mode",
     "dev": "Development mode with hot-reload",
     "deploy": "Deploy commands based on NODE_ENV",
     "deploy:prod": "Deploy commands globally (1 hour propagation)",
     "deploy:dev": "Deploy commands to development guild (instant)",
     "lint": "Check code quality",
+    "lint:fix": "Fix code style issues",
     "update": "Update dependencies",
     "clean": "Reset node_modules",
-    "create-command": "Generate a new command file"
+    "create-command": "Generate a new command file",
+    "logs:clean": "Remove all log files",
+    "logs:error": "Watch error logs with pretty printing",
+    "logs:all": "Watch all logs with pretty printing",
+    "logs:exceptions": "Watch uncaught exception logs",
+    "logs:rejections": "Watch unhandled rejection logs"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.1",
     "chalk": "^4.1.2",
-    "commander": "^11.1.0"
+    "commander": "^11.1.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
@@ -42,7 +57,8 @@
     "@inquirer/prompts": "^7.3.2",
     "ora": "^8.2.0",
     "gradient-string": "^3.0.0",
-    "figlet": "^1.8.0"
+    "figlet": "^1.8.0",
+    "pino-pretty": "^13.0.0"
   },
   "engines": {
     "node": ">=16.9.0"

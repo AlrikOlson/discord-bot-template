@@ -66,10 +66,9 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['config.js'],
+            files: ['src/config/**/*.js'],
             rules: {
                 'max-len': 'off',
-                'quote-props': 'off',
             },
         },
         {
