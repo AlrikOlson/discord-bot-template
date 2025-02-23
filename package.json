@@ -5,12 +5,12 @@
   "description": "A production-ready Discord bot template with modern features and best practices",
   "main": "src/index.js",
   "scripts": {
-    "prepare": "node src/scripts/init.js",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "deploy": "node src/scripts/deploy.js",
     "deploy:prod": "cross-env NODE_ENV=production node src/scripts/deploy.js",
     "deploy:dev": "cross-env NODE_ENV=development node src/scripts/deploy.js",
+    "init": "node src/scripts/init.js",
     "lint": "eslint src/",
     "lint:fix": "eslint src/** --fix",
     "update": "npm update",
@@ -23,12 +23,12 @@
     "logs:rejections": "tail -f logs/rejections.log | pino-pretty"
   },
   "scripts-comments": {
-    "prepare": "Initialize required directories",
     "start": "Production mode",
     "dev": "Development mode with hot-reload",
     "deploy": "Deploy commands based on NODE_ENV",
     "deploy:prod": "Deploy commands globally (1 hour propagation)",
     "deploy:dev": "Deploy commands to development guild (instant)",
+    "init": "Initialize required directories",
     "lint": "Check code quality",
     "lint:fix": "Fix code style issues",
     "update": "Update dependencies",
@@ -72,10 +72,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/yet-another-discord-bot-template.git"
+    "url": "git+https://github.com/AlrikOlson/discord-bot-template.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/yet-another-discord-bot-template/issues"
+    "url": "https://github.com/AlrikOlson/discord-bot-template/issues"
   },
   "author": "Your Name",
   "license": "MIT"
