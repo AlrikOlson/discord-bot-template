@@ -79,8 +79,6 @@ npm run lint        # Check code quality
 npm run lint:fix    # Fix code style
 ```
 
-````
-
 ## 🚀 Production
 
 ```bash
@@ -183,6 +181,4 @@ MIT. See [LICENSE](LICENSE).
   <i>Built with Discord.js and a reasonable amount of caffeine.</i><br>
   <i>Star ⭐ this repository if you found it helpful!</i>
 </div>
-
-````
 
