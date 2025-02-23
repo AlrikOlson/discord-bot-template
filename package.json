@@ -7,12 +7,12 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "deploy": "node src/scripts/deploy.js",
-    "deploy:prod": "NODE_ENV=production node src/scripts/deploy.js",
-    "deploy:dev": "NODE_ENV=development node src/scripts/deploy.js",
+    "deploy:prod": "cross-env NODE_ENV=production node src/scripts/deploy.js",
+    "deploy:dev": "cross-env NODE_ENV=development node src/scripts/deploy.js",
     "lint": "eslint src/",
     "lint-fix": "eslint src/** --fix",
     "update": "npm update",
-    "clean": "rm -rf node_modules package-lock.json && npm install"
+    "clean": "rimraf node_modules package-lock.json && npm install"
   },
   "scripts-comments": {
     "start": "Runs the bot in production mode",
@@ -29,8 +29,10 @@
     "dotenv": "^16.4.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "rimraf": "^5.0.5"
   },
   "engines": {
     "node": ">=16.9.0"
