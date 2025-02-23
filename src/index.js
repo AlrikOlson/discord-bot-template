@@ -1,9 +1,17 @@
-require('dotenv').config();
-const { Client, GatewayIntentBits, Collection, Partials } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
-const config = require('./config');
-const ErrorHandler = require('./events/errorHandler');
+import dotenv from 'dotenv';
+import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import config from './config.js';
+import ErrorHandler from './events/errorHandler.js';
+
+// Initialize dotenv
+dotenv.config();
+
+// ES Module dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Discord Bot Main Class
@@ -29,35 +37,37 @@ class Bot {
 
         // Attach commands collection to the client itself
         this.client.commands = new Collection();
-    
+
         // Initialize bot systems
         this.initialize();
     }
 
     /**
-   * Initializes all bot systems and handlers
-   */
-    initialize() {
-    // Initialize error handlers first
+     * Initializes all bot systems and handlers
+     */
+    async initialize() {
+        // Initialize error handlers first
         ErrorHandler.initializeProcessErrorHandlers(this.client);
-    
-        this.loadCommands();
+
+        await this.loadCommands();
         this.setupEventHandlers();
         this.setupCooldowns();
     }
 
     /**
-   * Loads all command files from the commands directory
-   */
-    loadCommands() {
+     * Loads all command files from the commands directory
+     */
+    async loadCommands() {
         const commandsPath = path.join(__dirname, 'commands');
-    
+
         try {
             const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
             for (const file of commandFiles) {
                 const filePath = path.join(commandsPath, file);
-                const command = require(filePath);
+                const commandURL = `file://${filePath}`;
+                const commandModule = await import(commandURL);
+                const command = commandModule.default;
 
                 if ('data' in command && 'execute' in command) {
                     this.client.commands.set(command.data.name, command);
@@ -73,18 +83,18 @@ class Bot {
     }
 
     /**
-   * Sets up the command cooldown system
-   */
+     * Sets up the command cooldown system
+     */
     setupCooldowns() {
         this.client.cooldowns = new Collection();
     }
 
     /**
-   * Handles command cooldown checking
-   * @param {Object} interaction - Discord interaction object
-   * @param {Object} command - Command object
-   * @returns {boolean} Whether the command is on cooldown
-   */
+     * Handles command cooldown checking
+     * @param {Object} interaction - Discord interaction object
+     * @param {Object} command - Command object
+     * @returns {boolean} Whether the command is on cooldown
+     */
     handleCooldown(interaction, command) {
         if (!this.client.cooldowns.has(command.data.name)) {
             this.client.cooldowns.set(command.data.name, new Collection());
@@ -113,10 +123,10 @@ class Bot {
     }
 
     /**
-   * Sets up all event handlers for the bot
-   */
+     * Sets up all event handlers for the bot
+     */
     setupEventHandlers() {
-    // Ready event
+        // Ready event
         this.client.once('ready', () => {
             console.log(`Logged in as ${this.client.user.tag}`);
             this.setPresence();
@@ -141,7 +151,7 @@ class Bot {
                     guild: interaction.guild,
                     channel: interaction.channel,
                 });
-        
+
                 if (interaction.replied || interaction.deferred) {
                     await interaction.editReply(errorResponse);
                 } else {
@@ -157,7 +167,7 @@ class Bot {
 
         // Handle shard errors if sharding is enabled
         this.client.on('shardError', async (error, shardId) => {
-            await ErrorHandler.handleError(error, { 
+            await ErrorHandler.handleError(error, {
                 type: 'Shard Error',
                 shardId: shardId,
             });
@@ -165,8 +175,8 @@ class Bot {
     }
 
     /**
-   * Sets the bot's presence status
-   */
+     * Sets the bot's presence status
+     */
     setPresence() {
         try {
             this.client.user.setPresence({
@@ -179,14 +189,14 @@ class Bot {
     }
 
     /**
-   * Starts the bot and handles login
-   */
+     * Starts the bot and handles login
+     */
     async start() {
         try {
             // Log startup mode
             console.log(`Starting bot in ${process.env.NODE_ENV} mode`);
             console.log('Note: Command deployment is handled separately via "npm run deploy"');
-      
+
             // Login to Discord
             await this.client.login(process.env.TOKEN);
         } catch (error) {
@@ -201,4 +211,4 @@ const bot = new Bot();
 bot.start();
 
 // Export the bot instance for testing purposes
-module.exports = bot;
+export default bot;

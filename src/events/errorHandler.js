@@ -1,8 +1,8 @@
-const { colors } = require('../config');
-const { EmbedBuilder, WebhookClient } = require('discord.js');
+import { EmbedBuilder, WebhookClient } from 'discord.js';
+import { colors } from '../config.js';
 
 // Optional: Create a webhook for logging errors to a Discord channel
-const errorWebhook = process.env.ERROR_WEBHOOK_URL 
+const errorWebhook = process.env.ERROR_WEBHOOK_URL
     ? new WebhookClient({ url: process.env.ERROR_WEBHOOK_URL })
     : null;
 
@@ -25,18 +25,18 @@ class ErrorHandler {
 
         // Add context information if available
         if (context.command) {
-            errorEmbed.addFields({ 
-                name: 'Command', 
-                value: context.command, 
-                inline: true, 
+            errorEmbed.addFields({
+                name: 'Command',
+                value: context.command,
+                inline: true,
             });
         }
 
         if (context.user) {
-            errorEmbed.addFields({ 
-                name: 'User', 
-                value: `${context.user.tag} (${context.user.id})`, 
-                inline: true, 
+            errorEmbed.addFields({
+                name: 'User',
+                value: `${context.user.tag} (${context.user.id})`,
+                inline: true,
             });
         }
 
@@ -83,4 +83,4 @@ class ErrorHandler {
     }
 }
 
-module.exports = ErrorHandler;
+export default ErrorHandler;

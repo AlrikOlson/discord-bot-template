@@ -1,19 +1,19 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const config = require('../config');
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import config from '../config.js';
 
-module.exports = {
+export default {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Checks the bot\'s latency and API response time'),
-    
+
     category: config.categories.UTILITY,
     cooldown: config.cooldowns.commands.ping,
 
     async execute(interaction) {
         // Initial response
-        const sent = await interaction.reply({ 
+        const sent = await interaction.reply({
             content: 'Pinging...',
-            fetchReply: true, 
+            fetchReply: true,
         });
 
         // Calculate latencies
@@ -25,26 +25,26 @@ module.exports = {
             .setTitle('🏓 Pong!')
             .setColor(config.colors.primary)
             .addFields(
-                { 
-                    name: 'WebSocket Latency', 
+                {
+                    name: 'WebSocket Latency',
                     value: `${wsLatency}ms`,
-                    inline: true, 
+                    inline: true,
                 },
-                { 
-                    name: 'API Roundtrip', 
+                {
+                    name: 'API Roundtrip',
                     value: `${roundtripLatency}ms`,
-                    inline: true, 
+                    inline: true,
                 },
             )
-            .setFooter({ 
-                text: `Requested by ${interaction.user.tag}`, 
+            .setFooter({
+                text: `Requested by ${interaction.user.tag}`,
             })
             .setTimestamp();
 
         // Edit the initial reply with the detailed embed
-        await interaction.editReply({ 
-            content: null, 
-            embeds: [embed], 
+        await interaction.editReply({
+            content: null,
+            embeds: [embed],
         });
     },
 };

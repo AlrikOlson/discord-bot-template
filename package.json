@@ -1,6 +1,7 @@
 {
   "name": "discord-bot-template",
   "version": "1.1.0",
+  "type": "module",
   "description": "A production-ready Discord bot template with modern features and best practices",
   "main": "src/index.js",
   "scripts": {
@@ -12,7 +13,8 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/** --fix",
     "update": "npm update",
-    "clean": "rimraf node_modules package-lock.json && npm install"
+    "clean": "rimraf node_modules package-lock.json && npm install",
+    "create-command": "node src/scripts/create-command.js"
   },
   "scripts-comments": {
     "start": "Production mode",
@@ -22,17 +24,25 @@
     "deploy:dev": "Deploy commands to development guild (instant)",
     "lint": "Check code quality",
     "update": "Update dependencies",
-    "clean": "Reset node_modules"
+    "clean": "Reset node_modules",
+    "create-command": "Generate a new command file"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.1"
+    "dotenv": "^16.4.1",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "inquirer": "^12.4.2",
+    "@inquirer/prompts": "^7.3.2",
+    "ora": "^8.2.0",
+    "gradient-string": "^3.0.0",
+    "figlet": "^1.8.0"
   },
   "engines": {
     "node": ">=16.9.0"
