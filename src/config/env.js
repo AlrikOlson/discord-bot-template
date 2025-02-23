@@ -23,9 +23,6 @@ export const env = {
     LOG_FORMAT: process.env.LOG_FORMAT || 'json',
     LOG_MAX_FILES: parseInt(process.env.LOG_MAX_FILES || '5'),
     LOG_MAX_SIZE: process.env.LOG_MAX_SIZE || '5m',
-
-    // Error Reporting
-    SENTRY_DSN: process.env.SENTRY_DSN,
 };
 
 // Validate required environment variables
