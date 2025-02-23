@@ -7,10 +7,15 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions: # Set default permissions to none
+  contents: read
+
 jobs:
   test:
     name: Test & Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Only needs read access to check out code
 
     strategy:
       matrix:
@@ -44,8 +49,8 @@ jobs:
     name: Label PRs
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read # Only needs read access to check out code
+      pull-requests: write # Needs write access to add labels to PRs
     steps:
       - uses: actions/labeler@v4
         with:
