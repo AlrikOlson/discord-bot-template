@@ -1,15 +1,15 @@
 name: Bug Report
-description: Something's broken? Fine, tell me about it.
-labels: ["bug"]
+description: Report an issue with the bot
+labels: ['bug']
 body:
   - type: markdown
     attributes:
       value: |
-        Before reporting a bug, please:
-        1. Actually check if it's a bug
-        2. Make sure you're using the latest version
-        3. Search existing issues
-        4. Consider if it's just you doing something wrong
+        Before submitting a bug report, please:
+        - Verify the issue persists on the latest version
+        - Search existing issues
+        - Check the documentation
+        - Test in a clean environment
 
   - type: input
     id: node-version
@@ -32,42 +32,43 @@ body:
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: Also tell us what you expected to happen. You know, for context.
-      placeholder: My bot exploded when...
+      label: Issue Description
+      description: What happened and what did you expect to happen?
+      placeholder: Describe the issue and expected behavior
     validations:
       required: true
 
   - type: textarea
     id: reproduction
     attributes:
-      label: How to reproduce this?
-      description: Give us steps to reproduce this issue. Code examples are good.
+      label: Reproduction Steps
+      description: How can we reproduce this issue?
       placeholder: |
-        1. Create a command that...
-        2. Run it with...
-        3. Watch everything break...
+        1. Create a command...
+        2. Execute with...
+        3. Observe...
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted.
+      label: Relevant Logs
+      description: Include any relevant error logs or output
       render: shell
 
   - type: checkboxes
     id: terms
     attributes:
-      label: Final checklist
-      description: Before submitting, please confirm that you...
+      label: Verification
+      description: Please verify that you have completed these steps
       options:
-        - label: Actually read the README
+        - label: I have read the documentation
           required: true
-        - label: Searched for existing issues
+        - label: I have searched for existing issues
           required: true
-        - label: Are using the latest version
+        - label: I am using the latest version
           required: true
-        - label: Tried turning it off and on again
+        - label: I have tested in a clean environment
           required: true
+

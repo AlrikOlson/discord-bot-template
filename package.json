@@ -1,7 +1,7 @@
 {
   "name": "yet-another-discord-bot-template",
   "version": "1.0.0",
-  "description": "A Discord bot template that won't completely ruin your day",
+  "description": "A production-ready Discord bot template with modern features and best practices",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -10,19 +10,19 @@
     "deploy:prod": "cross-env NODE_ENV=production node src/scripts/deploy.js",
     "deploy:dev": "cross-env NODE_ENV=development node src/scripts/deploy.js",
     "lint": "eslint src/",
-    "lint-fix": "eslint src/** --fix",
+    "lint:fix": "eslint src/** --fix",
     "update": "npm update",
     "clean": "rimraf node_modules package-lock.json && npm install"
   },
   "scripts-comments": {
-    "start": "Runs the bot in production mode",
-    "dev": "Runs the bot with hot-reload for development",
-    "deploy": "Deploys commands based on NODE_ENV (separate from bot runtime)",
-    "deploy:prod": "Deploys commands globally (takes up to 1 hour to propagate)",
-    "deploy:dev": "Deploys commands to development guild (instant update)",
-    "lint": "Checks your code for obvious mistakes",
-    "update": "Updates dependencies to latest version (might break everything)",
-    "clean": "Nuclear option when node_modules gets possessed"
+    "start": "Production mode",
+    "dev": "Development mode with hot-reload",
+    "deploy": "Deploy commands based on NODE_ENV",
+    "deploy:prod": "Deploy commands globally (1 hour propagation)",
+    "deploy:dev": "Deploy commands to development guild (instant)",
+    "lint": "Check code quality",
+    "update": "Update dependencies",
+    "clean": "Reset node_modules"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
@@ -51,6 +51,6 @@
   "bugs": {
     "url": "https://github.com/yourusername/yet-another-discord-bot-template/issues"
   },
-  "author": "Your Name (or don't, I'm not your boss)",
+  "author": "Your Name",
   "license": "MIT"
 }

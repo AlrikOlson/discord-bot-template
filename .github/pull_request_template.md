@@ -1,63 +1,44 @@
-## What?
+## Changes
 
-<!-- What did you change? -->
+<!-- What does this PR change? -->
 
-## Why?
+## Motivation
 
-<!-- Why did you change it? -->
+<!-- Why make these changes? -->
 
-## How?
+## Implementation
 
-<!-- How did you change it? -->
+<!-- How were the changes implemented? -->
 
-## Testing?
+## Testing
 
-<!-- How did you test it? -->
+<!-- How were the changes tested? -->
 
-## Screenshots (if applicable)
+## Screenshots
 
-<!-- Show us the goods -->
+<!-- If applicable, add screenshots -->
 
 ## Checklist
 
-<!-- Don't remove items, just mark them as done -->
+-   [ ] Code follows style guidelines
+-   [ ] Tests added/updated
+-   [ ] Documentation updated
+-   [ ] No breaking changes (or documented if necessary)
+-   [ ] Self-review completed
+-   [ ] Test environment verified
+-   [ ] Existing functionality preserved
 
--   [ ] I have read the [Contributing Guidelines](CONTRIBUTING.md)
--   [ ] My code follows the style guidelines
--   [ ] I have commented my code, particularly in hard-to-understand areas
--   [ ] I have updated the documentation
--   [ ] I have added tests that prove my fix is effective or that my feature
-        works
--   [ ] New and existing unit tests pass locally with my changes
--   [ ] Any dependent changes have been merged and published
--   [ ] I have checked my code and corrected any misspellings
--   [ ] I have performed a self-review of my own code
--   [ ] I have tested this in my test server
--   [ ] I didn't break anything (that wasn't supposed to be broken)
+## Breaking Changes
 
-## Breaking Changes?
-
-<!-- Will users need to do anything special when upgrading? -->
-
--   [ ] Yes, and I documented it
+-   [ ] Yes (documented below)
 -   [ ] No
 
-## Dependencies Added?
+## Dependencies
 
-<!-- Did you add any new dependencies? -->
+-   [ ] Added (listed below)
+-   [ ] No changes
 
--   [ ] Yes, and here's why: **\_**
--   [ ] No
+## Additional Notes
 
-## Anything Else?
-
-<!-- Add any other context or screenshots about the pull request here -->
-
-<!--
-Pro Tips:
-- Keep it simple
-- Test your changes
-- Don't break production
-- Ask for help if needed
--->
+<!-- Any other relevant information -->
 
